@@ -3,6 +3,7 @@ package com.example.marketplace
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -22,37 +23,36 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val textWatcher = object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        fun getTextWatcher(editText: EditText, ){
+            editText.addTextChangedListener(object: TextWatcher{
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Проверка всех полей на валидность и активация кнопки "Войти"
-                val firstNameValid = validateCyrillicText(binding.name.text.toString())
-                val lastNameValid = validateCyrillicText(binding.lastName.text.toString())
-                val phoneNumberValid = validatePhoneNumber(binding.phoneNumber.text.toString())
-
-                if(firstNameValid && lastNameValid && phoneNumberValid){
-                    binding.logIn.isEnabled
                 }
-            }
 
-            override fun afterTextChanged(s: Editable?) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    editText.background.clearColorFilter()
+                    editText.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    val text = s.toString()
+
+                    if (text.contains(Regex("[^А-Яа-я]"))){
+                        editText.background.setColorFilter(Color.RED,PorterDuff.Mode.SRC_ATOP)
+                        editText.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.clear_btn,0)
+                    }else {
+                        binding.name.background.clearColorFilter()
+                        binding.name.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+                    }
+                }
+
+            })
         }
 
-        binding.name.addTextChangedListener(textWatcher)
-        binding.lastName.addTextChangedListener(textWatcher)
-        binding.phoneNumber.addTextChangedListener(textWatcher)
+        getTextWatcher(binding.name)
+        getTextWatcher(binding.lastName)
 
-    }
 
-    // Валидация текста на кириллицу
-    private fun validateCyrillicText(text: String): Boolean {
-        return text.matches("[А-Яа-я ]+".toRegex())
-    }
-
-    // Валидация номера телефона
-    private fun validatePhoneNumber(phoneNumber: String): Boolean {
-        return phoneNumber.matches("\\+7 \\d{3} \\d{3}-\\d{2}-\\d{2}".toRegex())
     }
 
 }
