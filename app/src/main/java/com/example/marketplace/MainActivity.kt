@@ -25,27 +25,13 @@ class MainActivity : AppCompatActivity() {
 
 
         fun getTextWatcher(editText: EditText, ){
+            editText.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+
             editText.addTextChangedListener(object: TextWatcher{
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                    editText.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
-                }
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     editText.background.clearColorFilter()
-
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    val text = s.toString()
-
-                    if (text.contains(Regex("[^А-Яа-я]"))){
-                        editText.background.setColorFilter(Color.RED,PorterDuff.Mode.SRC_ATOP)
-//                        editText.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.clear_btn,0)
-
-                    }else binding.name.background.clearColorFilter()
-
-                    editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                        0, 0, if (s.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
 
                     editText.setOnTouchListener { v, event ->
                         if (event.action == MotionEvent.ACTION_UP &&
@@ -54,18 +40,29 @@ class MainActivity : AppCompatActivity() {
                             val clearButtonPosition = editText.width - editText.paddingEnd
                             if (event.rawX >= (clearButtonPosition - editText.compoundDrawablesRelative[2].bounds.width())) {
                                 editText.setText("")
-                                return@setOnTouchListener true
-                            }
+                                return@setOnTouchListener true }
                         }
                         false
                     }
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    val text = s.toString()
+
+                    if (text.contains(Regex("[^А-Яа-я]"))){
+                        editText.background.setColorFilter(Color.RED,PorterDuff.Mode.SRC_ATOP)
+                    } else binding.name.background.clearColorFilter()
+
+                    editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        0, 0, if (s.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+
                 }
             })
         }
 
         getTextWatcher(binding.name)
         getTextWatcher(binding.lastName)
-        var editText = binding.name
 
 
 

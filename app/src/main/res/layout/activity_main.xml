@@ -26,10 +26,8 @@
         android:layout_marginTop="145dp"
         android:background="@drawable/edit_text_backgtound"
         android:drawableEnd="@drawable/clear_btn"
-        android:drawablePadding="16dp"
         android:hint="Имя"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInTV" />
@@ -44,8 +42,7 @@
         android:background="@drawable/edit_text_backgtound"
         android:drawableEnd="@drawable/clear_btn"
         android:hint="Фамилия"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
@@ -59,8 +56,7 @@
         android:background="@drawable/edit_text_backgtound"
         android:drawableEnd="@drawable/clear_btn"
         android:hint="Номер телефона"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lastName" />
