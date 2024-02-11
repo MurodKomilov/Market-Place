@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
 import com.example.marketplace.databinding.ActivityMainBinding
@@ -26,12 +27,12 @@ class MainActivity : AppCompatActivity() {
         fun getTextWatcher(editText: EditText, ){
             editText.addTextChangedListener(object: TextWatcher{
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                    editText.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     editText.background.clearColorFilter()
-                    editText.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0)
+
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -39,18 +40,35 @@ class MainActivity : AppCompatActivity() {
 
                     if (text.contains(Regex("[^А-Яа-я]"))){
                         editText.background.setColorFilter(Color.RED,PorterDuff.Mode.SRC_ATOP)
-                        editText.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.clear_btn,0)
-                    }else {
-                        binding.name.background.clearColorFilter()
-                        binding.name.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+//                        editText.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.clear_btn,0)
+
+                    }else binding.name.background.clearColorFilter()
+
+                    editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                        0, 0, if (s.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+
+                    editText.setOnTouchListener { v, event ->
+                        if (event.action == MotionEvent.ACTION_UP &&
+                            editText.compoundDrawablesRelative.getOrNull(2) != null) {
+
+                            val clearButtonPosition = editText.width - editText.paddingEnd
+                            if (event.rawX >= (clearButtonPosition - editText.compoundDrawablesRelative[2].bounds.width())) {
+                                editText.setText("")
+                                return@setOnTouchListener true
+                            }
+                        }
+                        false
                     }
                 }
-
             })
         }
 
         getTextWatcher(binding.name)
         getTextWatcher(binding.lastName)
+        var editText = binding.name
+
+
+
 
 
     }

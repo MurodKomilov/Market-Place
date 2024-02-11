@@ -26,6 +26,7 @@
         android:layout_marginTop="145dp"
         android:background="@drawable/edit_text_backgtound"
         android:drawableEnd="@drawable/clear_btn"
+        android:drawablePadding="16dp"
         android:hint="Имя"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
