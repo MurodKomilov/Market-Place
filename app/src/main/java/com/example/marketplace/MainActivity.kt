@@ -2,6 +2,7 @@ package com.example.marketplace
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.LightingColorFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
@@ -78,11 +79,11 @@ class MainActivity : AppCompatActivity() {
         val nameFilled = binding.name.text.isNotEmpty()
         val lastNameFilled = binding.lastName.text.isNotEmpty()
 
-        if (nameFilled){
-            binding.logIn.setBackgroundColor(binding.logIn.context.resources.getColor(R.color.btn_background))
+        if (nameFilled && lastNameFilled){
+            binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
             binding.logIn.isEnabled = true
         } else {
-            binding.logIn.setBackgroundColor(binding.logIn.context.resources.getColor(R.color.btn_background2))
+            binding.logIn.background.setColorFilter(0xFFFF8AC9.toInt(), PorterDuff.Mode.SRC_ATOP)
             binding.logIn.isEnabled = false
         }
 
