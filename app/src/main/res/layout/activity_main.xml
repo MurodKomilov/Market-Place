@@ -26,10 +26,10 @@
         android:layout_marginTop="145dp"
         android:background="@drawable/edit_text_backgtound"
         android:drawableEnd="@drawable/clear_btn"
-        android:textColorHint="#A0A1A3"
         android:hint="Имя"
-        android:textColor="@color/black"
         android:paddingHorizontal="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="#A0A1A3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInTV" />
@@ -51,7 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name" />
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/phoneNumber"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -62,6 +62,11 @@
         android:textColorHint="#A0A1A3"
         android:hint="Номер телефона"
         android:textColor="@color/black"
+        android:inputType="number"
+        app:mask="+7 ### ### ## ##"
+        app:maskCharacter="#"
+        android:typeface="normal"
+        app:maskStyle="completable"
         android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
