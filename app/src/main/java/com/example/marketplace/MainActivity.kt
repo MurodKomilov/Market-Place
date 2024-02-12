@@ -35,12 +35,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            binding.name.background.clearColorFilter()
-            binding.lastName.background.clearColorFilter()
-
-            icClear(binding.name)
-            icClear(binding.lastName)
-
+            icClear(binding.name)           // Запускает функцию иконки
+            icClear(binding.lastName)       // Запускает функцию иконки
         }
 
         override fun afterTextChanged(s: Editable?) {
@@ -52,8 +48,8 @@ class MainActivity : AppCompatActivity() {
             val text1 = binding.name.text.toString()
             val text2 = binding.lastName.text.toString()
 
-            val isNameCyrillic = isTextCyrillic(text1)
-            val isLastNameCyrillic = isTextCyrillic(text2)
+            val isNameCyrillic = isTextCyrillic(text1)          // Проверки EditText на кириллицу
+            val isLastNameCyrillic = isTextCyrillic(text2)      // Проверки EditText на кириллицу
 
             if (isNameCyrillic && isLastNameCyrillic){     // Активация кнопки LogIn
                 binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
@@ -66,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isTextCyrillic(text: String): Boolean {
+    private fun isTextCyrillic(text: String): Boolean {  // Логика для
         val cyrillicRegex = Regex("[А-Яа-яЁё]+")
         return cyrillicRegex.matches(text)
     }
@@ -78,7 +74,6 @@ class MainActivity : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP &&
                 editText.compoundDrawablesRelative.getOrNull(2) != null
             ) {
-
                 val clearButtonPosition = editText.width - editText.paddingEnd
                 if (event.rawX >= (clearButtonPosition - editText.compoundDrawablesRelative[2].bounds.width())) {
                     editText.setText("")
