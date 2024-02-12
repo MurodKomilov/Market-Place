@@ -56,7 +56,6 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_text_backgtound"
-        android:drawableEnd="@drawable/clear_btn"
         android:textColorHint="#A0A1A3"
         android:hint="Номер телефона"
         android:textColor="@color/black"

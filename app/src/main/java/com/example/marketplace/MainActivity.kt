@@ -13,8 +13,8 @@ import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.toColor
 import com.example.marketplace.databinding.ActivityMainBinding
+import com.santalu.maskara.widget.MaskEditText
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.name.addTextChangedListener(textWatcher)
         binding.lastName.addTextChangedListener(textWatcher)
-
+        binding.phoneNumber.addTextChangedListener(textWatcher)
 
     }
 
@@ -36,29 +36,30 @@ class MainActivity : AppCompatActivity() {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             icClear(binding.name)           // Запускает функцию иконки
-            icClear(binding.lastName)       // Запускает функцию иконки
+            icClear(binding.lastName)      // Запускает функцию иконки
+            icClear(binding.phoneNumber)
         }
 
         override fun afterTextChanged(s: Editable?) {
 
             cyrillicValidation(binding.lastName)  //Проверка Валидацию на Кириллице
-            cyrillicValidation(binding.name)      //Проверка Валидацию на Кириллице
-
+            cyrillicValidation(binding.name) //Проверка Валидацию на Кириллице
+            maskEditText(binding.phoneNumber)
 
             val text1 = binding.name.text.toString()
             val text2 = binding.lastName.text.toString()
 
             val isNameCyrillic = isTextCyrillic(text1)          // Проверки EditText на кириллицу
             val isLastNameCyrillic = isTextCyrillic(text2)      // Проверки EditText на кириллицу
+            val phoneNumber = maskEditText(binding.phoneNumber)
 
-            if (isNameCyrillic && isLastNameCyrillic){     // Активация кнопки LogIn
+            if (isNameCyrillic && isLastNameCyrillic && phoneNumber){     // Активация кнопки LogIn
                 binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
                 binding.logIn.isEnabled = true
             } else{
                 binding.logIn.background.setColorFilter(0xFFFF8AC9.toInt(), PorterDuff.Mode.SRC_ATOP)
                 binding.logIn.isEnabled = false
             }
-
         }
     }
 
@@ -66,10 +67,9 @@ class MainActivity : AppCompatActivity() {
         val cyrillicRegex = Regex("[А-Яа-яЁё]+")
         return cyrillicRegex.matches(text)
     }
-
     @SuppressLint("ClickableViewAccessibility")
     private fun icClear(editText:EditText) {
-        Log.d("bosildi", "icClear : $editText ")
+
         editText.setOnTouchListener { _, event ->          // Логика иконки крестика
             if (event.action == MotionEvent.ACTION_UP &&
                 editText.compoundDrawablesRelative.getOrNull(2) != null
@@ -91,12 +91,30 @@ class MainActivity : AppCompatActivity() {
             editText.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
         } else {
             editText.background.clearColorFilter()
+            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
         }
-        editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
-            0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0
-        )
-
     }
+
+
+    fun maskEditText(mask: MaskEditText):Boolean{
+        var raw = mask.text.isNullOrEmpty()
+        var isDone = mask.isDone
+
+        if (isDone){
+            mask.background.clearColorFilter()
+            return true
+        } else{
+            if (raw) mask.background.clearColorFilter()
+            else{
+                mask.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
+                mask.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+            }
+        }
+        return false
+    }
+
 
 }
 
