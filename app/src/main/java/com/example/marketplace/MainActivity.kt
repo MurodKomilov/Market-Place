@@ -1,6 +1,7 @@
 package com.example.marketplace
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.LightingColorFilter
 import android.graphics.PorterDuff
@@ -27,8 +28,10 @@ class MainActivity : AppCompatActivity() {
 
         setUpEditText(binding.name)
         setUpEditText(binding.lastName)
+
         binding.logIn.setOnClickListener {
             Toast.makeText(this, "Bosildi", Toast.LENGTH_SHORT).show()
+//            startActivity(Intent(this,MenuActivity::class.java))
         }
     }
 
@@ -42,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 editText.background.clearColorFilter()
 
-                editText.setOnTouchListener { _, event ->
+                editText.setOnTouchListener { _, event ->          // Логика иконки крестика
                     if (event.action == MotionEvent.ACTION_UP &&
                         editText.compoundDrawablesRelative.getOrNull(2) != null) {
 
@@ -56,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {
+            override fun afterTextChanged(s: Editable?) {       // Проверка на Валидацию, если не правильно то просвечивается красным
                 val text = s.toString()
 
                 if (text.contains(Regex("[^А-Яа-я]"))) {
@@ -75,13 +78,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun checkEditTexts() {
+    private fun checkEditTexts() {                               // Влючение кнрпки Log In
         val nameFilled = binding.name.text.isNotEmpty()
         val lastNameFilled = binding.lastName.text.isNotEmpty()
 
+        var nameValidate = binding.name.text.contains(Regex("[^А-Яа-я]"))
+        var lastNameValidate = binding.lastName.text.contains(Regex("[^А-Яа-я]"))
+
         if (nameFilled && lastNameFilled){
-            binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
-            binding.logIn.isEnabled = true
+            if (!nameValidate && !lastNameValidate){
+                binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
+                binding.logIn.isEnabled = true
+            }
         } else {
             binding.logIn.background.setColorFilter(0xFFFF8AC9.toInt(), PorterDuff.Mode.SRC_ATOP)
             binding.logIn.isEnabled = false
@@ -90,5 +98,3 @@ class MainActivity : AppCompatActivity() {
 
     }
 }
-
-
