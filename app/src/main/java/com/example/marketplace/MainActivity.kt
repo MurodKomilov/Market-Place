@@ -36,22 +36,22 @@ class MainActivity : AppCompatActivity() {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             icClear(binding.name)           // Запускает функцию иконки
-            icClear(binding.lastName)      // Запускает функцию иконки
-            icClear(binding.phoneNumber)
+            icClear(binding.lastName)       // Запускает функцию иконки
+            icClear(binding.phoneNumber)    // Запускает функцию иконки
         }
 
         override fun afterTextChanged(s: Editable?) {
 
-            cyrillicValidation(binding.lastName)  //Проверка Валидацию на Кириллице
-            cyrillicValidation(binding.name) //Проверка Валидацию на Кириллице
-            maskEditText(binding.phoneNumber)
+            cyrillicValidation(binding.lastName)    // Проверка Валидацию на Кириллице
+            cyrillicValidation(binding.name)        // Проверка Валидацию на Кириллице
+            maskEditText(binding.phoneNumber)       // Проверка Валидацию на Кириллице
 
             val text1 = binding.name.text.toString()
             val text2 = binding.lastName.text.toString()
 
-            val isNameCyrillic = isTextCyrillic(text1)          // Проверки EditText на кириллицу
-            val isLastNameCyrillic = isTextCyrillic(text2)      // Проверки EditText на кириллицу
-            val phoneNumber = maskEditText(binding.phoneNumber)
+            val isNameCyrillic = checkCyrillicForBtn(text1)          // Проверка EditText на Активацию кнопки LogIn
+            val isLastNameCyrillic = checkCyrillicForBtn(text2)      // Проверка EditText на Активацию кнопки LogIn
+            val phoneNumber = maskEditText(binding.phoneNumber)      // Проверка MaskEditText на Активацию кнопки LogIn
 
             if (isNameCyrillic && isLastNameCyrillic && phoneNumber){     // Активация кнопки LogIn
                 binding.logIn.background.setColorFilter(0xFFD62F89.toInt(), PorterDuff.Mode.SRC_ATOP)
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun isTextCyrillic(text: String): Boolean {  // Логика для
+    private fun checkCyrillicForBtn(text: String): Boolean {  // Логика для проверки EditText на Активацию кнопки LogIn
         val cyrillicRegex = Regex("[А-Яа-яЁё]+")
         return cyrillicRegex.matches(text)
     }
@@ -91,24 +91,27 @@ class MainActivity : AppCompatActivity() {
             editText.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
         } else {
             editText.background.clearColorFilter()
-            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
                 0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
         }
     }
 
 
-    fun maskEditText(mask: MaskEditText):Boolean{
+    fun maskEditText(mask: MaskEditText):Boolean{   // Логика для проверки MaskEditText на Активацию кнопки LogIn
         var raw = mask.text.isNullOrEmpty()
         var isDone = mask.isDone
 
-        if (isDone){
+        if (raw) return false                   // Если MaskEditText Пусто то возвращяет false
+
+        if (isDone){                            // Если MaskEditText Полностью заполнена то возвращяет true
             mask.background.clearColorFilter()
             return true
         } else{
-            if (raw) mask.background.clearColorFilter()
-            else{
+            if (raw) {
+                mask.background.clearColorFilter()
+            } else{
                 mask.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
-                mask.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                mask.setCompoundDrawablesRelativeWithIntrinsicBounds(   // Показывает иконку крестика
                 0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
             }
         }
