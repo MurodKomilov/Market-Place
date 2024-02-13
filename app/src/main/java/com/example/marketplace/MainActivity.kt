@@ -3,7 +3,6 @@ package com.example.marketplace
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.LightingColorFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +10,6 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.marketplace.SharedPreferences.MyPreferences
 import com.example.marketplace.databinding.ActivityMainBinding
@@ -48,6 +46,8 @@ class MainActivity : AppCompatActivity() {
 
             sharedPreferences.putData(JSON_KEY,jsonText)
             Log.d("SharedPerferences", "onCreate: $userList")
+
+            startActivity(Intent(this,MenuActivity::class.java))
 
         }
 
@@ -113,11 +113,11 @@ class MainActivity : AppCompatActivity() {
         if (text.contains(Regex("[^А-Яа-я]"))) {
             editText.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
             editText.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
-                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.ic_clear, 0)
         } else {
             editText.background.clearColorFilter()
             editText.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
-                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.ic_clear, 0)
         }
     }
 
@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
             } else{
                 mask.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
                 mask.setCompoundDrawablesRelativeWithIntrinsicBounds(   // Показывает иконку крестика
-                    0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+                    0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.ic_clear, 0)
             }
         }
         return false
