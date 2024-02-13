@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="red">#FF0000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="nav_menu_btn">#D62F89</color>
     <color name="btn_background">#D62F89</color>
     <color name="btn_background2">#FF8AC9</color>
 </resources>

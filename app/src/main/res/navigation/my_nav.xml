@@ -10,44 +10,29 @@
         android:name="com.example.marketplace.Fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_catalogFragment"
-            app:destination="@id/catalogFragment" />
     </fragment>
     <fragment
         android:id="@+id/catalogFragment"
         android:name="com.example.marketplace.Fragments.CatalogFragment"
         android:label="fragment_catalog"
         tools:layout="@layout/fragment_catalog" >
-        <action
-            android:id="@+id/action_catalogFragment_to_basketFragment"
-            app:destination="@id/basketFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.example.marketplace.Fragments.BasketFragment"
         android:label="fragment_basket"
         tools:layout="@layout/fragment_basket" >
-        <action
-            android:id="@+id/action_basketFragment_to_promotionFragment"
-            app:destination="@id/promotionFragment" />
     </fragment>
     <fragment
         android:id="@+id/promotionFragment"
         android:name="com.example.marketplace.Fragments.PromotionFragment"
         android:label="fragment_promotion"
         tools:layout="@layout/fragment_promotion" >
-        <action
-            android:id="@+id/action_promotionFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.marketplace.Fragments.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profileFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
 </navigation>

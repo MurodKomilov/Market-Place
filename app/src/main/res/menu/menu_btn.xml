@@ -3,31 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/home"
+        android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
         android:title="Главная"
         android:visible="true"/>
 
     <item
-        android:id="@+id/catalog"
+        android:id="@+id/catalogFragment"
         android:icon="@drawable/ic_catalog"
         android:title="Каталог"
         android:visible="true"/>
 
     <item
-        android:id="@+id/basket"
+        android:id="@+id/basketFragment"
         android:icon="@drawable/ic_basket"
         android:title="Корзина"
         android:visible="true"/>
 
     <item
-        android:id="@+id/promotion"
+        android:id="@+id/promotionFragment"
         android:icon="@drawable/ic_promotion"
         android:title="Акции"
         android:visible="true"/>
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
         android:title="Профиль"
         android:visible="true"/>
