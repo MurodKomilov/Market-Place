@@ -13,11 +13,17 @@ import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.marketplace.SharedPreferences.MyPreferences
 import com.example.marketplace.databinding.ActivityMainBinding
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.santalu.maskara.widget.MaskEditText
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    var userList = ArrayList<User>()
+    var JSON_KEY = "JSON_KEY"
+    var gson = Gson()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +33,23 @@ class MainActivity : AppCompatActivity() {
         binding.name.addTextChangedListener(textWatcher)
         binding.lastName.addTextChangedListener(textWatcher)
         binding.phoneNumber.addTextChangedListener(textWatcher)
+
+        var sharedPreferences = MyPreferences(this)
+        var readGson = sharedPreferences.readData(JSON_KEY,)
+
+        binding.logIn.setOnClickListener {
+            var typeOfObjectList = object : TypeToken<ArrayList<User>>(){}.type
+            val name = binding.name.text.toString()
+            val lastName = binding.lastName.text.toString()
+            val phoneNumber = binding.phoneNumber.text.toString()
+            userList.add(User(name,lastName,phoneNumber))
+
+            val jsonText = gson.toJson(userList,typeOfObjectList)
+
+            sharedPreferences.putData(JSON_KEY,jsonText)
+            Log.d("SharedPerferences", "onCreate: $userList")
+
+        }
 
     }
 
