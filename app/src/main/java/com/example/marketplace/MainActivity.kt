@@ -80,15 +80,17 @@ class MainActivity : AppCompatActivity() {
                     return@setOnTouchListener true
                 }
             }
-           false
+            false
         }
     }
 
     fun cyrillicValidation(editText:EditText){     // Валидация на Кириллицу, Если в EditText печатается на крилице, то все хорошо
-        val text = editText.text.toString()         // если нет то EditText покраснеет
+        val text = editText.text.toString()        // если нет то EditText покраснеет
 
         if (text.contains(Regex("[^А-Яа-я]"))) {
             editText.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
+            editText.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
+                0, 0, if (text.isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
         } else {
             editText.background.clearColorFilter()
             editText.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
@@ -101,9 +103,9 @@ class MainActivity : AppCompatActivity() {
         var raw = mask.text.isNullOrEmpty()
         var isDone = mask.isDone
 
-        if (raw) return false                   // Если MaskEditText Пусто то возвращяет false
+        if (raw) return false                       // Если MaskEditText Пусто то возвращяет false
 
-        if (isDone){                            // Если MaskEditText Полностью заполнена то возвращяет true
+        if (isDone){                                // Если MaskEditText Полностью заполнена то возвращяет true
             mask.background.clearColorFilter()
             return true
         } else{
@@ -112,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             } else{
                 mask.background.setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP)
                 mask.setCompoundDrawablesRelativeWithIntrinsicBounds(   // Показывает иконку крестика
-                0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
+                    0, 0, if (mask.text.toString().isNullOrEmpty()) 0 else R.drawable.clear_btn, 0)
             }
         }
         return false
@@ -120,5 +122,3 @@ class MainActivity : AppCompatActivity() {
 
 
 }
-
-
