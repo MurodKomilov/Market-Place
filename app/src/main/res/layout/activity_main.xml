@@ -8,9 +8,11 @@
 
     <TextView
         android:id="@+id/signInTV"
-        android:layout_width="37dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:text="Вход"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         android:layout_marginTop="59dp"
         app:layout_constraintEnd_toEndOf="parent"
