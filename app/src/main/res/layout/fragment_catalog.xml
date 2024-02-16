@@ -45,11 +45,10 @@
     <TextView
         android:id="@+id/filters"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_marginEnd="16dp"
         android:text=" Фильтры"
         android:textColor="#3E3E3E"
-        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/ic_popularity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/sortSpinner"

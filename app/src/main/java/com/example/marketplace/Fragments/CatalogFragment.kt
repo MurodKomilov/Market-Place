@@ -27,32 +27,30 @@ class CatalogFragment : Fragment() {
 
         val binding = FragmentCatalogBinding.bind(view)
 
-        var adapter = activity?.let { ArrayAdapter.createFromResource(it.baseContext,R.array.sortNames,android.R.layout.simple_spinner_item) }
-        adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.sortSpinner.adapter = adapter
-        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                Toast.makeText(requireContext(), "Выбрано: $selectedItem", Toast.LENGTH_SHORT).show()
-                // Ваш код для реакции на выбор элемента из Spinner
+            var adapter = activity?.let { ArrayAdapter.createFromResource(it.baseContext,R.array.sortNames,android.R.layout.simple_spinner_item) }
+            adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+            binding.sortSpinner.adapter = adapter
+            binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    val selectedItem = parent?.getItemAtPosition(position).toString()
+
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
             }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Действия, если не выбран ни один элемент из списка
-            }
-        }
 
 
         addData()
         val tagsAdapter = TagsAdapter(tagList,object: ClickListener{
-            override fun onClickListener(item: Tags) {
-            }
-
-        })
+            override fun onClickListener(item: Tags) {  } })
         binding.tags.adapter = tagsAdapter
-
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
         return view
+
     }
 
     fun addData(){
@@ -62,5 +60,7 @@ class CatalogFragment : Fragment() {
         tagList.add(Tags("Загар"))
         tagList.add(Tags("Маски"))
     }
+
+
 
 }
