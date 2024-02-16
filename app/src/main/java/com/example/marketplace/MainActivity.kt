@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.example.marketplace.Models.User
 import com.example.marketplace.SharedPreferences.MyPreferences
 import com.example.marketplace.databinding.ActivityMainBinding
 import com.google.gson.Gson

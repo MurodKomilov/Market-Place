@@ -1,4 +1,4 @@
-package com.example.marketplace
+package com.example.marketplace.Models
 
 data class User(
     var name:String,

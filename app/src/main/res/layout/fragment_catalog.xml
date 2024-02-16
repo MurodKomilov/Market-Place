@@ -25,18 +25,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/ic_popularity"
-        app:layout_constraintEnd_toStartOf="@id/filters"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/catalogTV" />
 
     <Spinner
         android:id="@+id/sortSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="18dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:contentDescription="Выбор сортировки"
         app:layout_constraintBottom_toBottomOf="@+id/ic_popularity"
+        app:layout_constraintEnd_toStartOf="@+id/filters"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toEndOf="@+id/ic_popularity"
         app:layout_constraintTop_toTopOf="@+id/ic_popularity" />
 
@@ -44,14 +46,25 @@
         android:id="@+id/filters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
         android:text=" Фильтры"
         android:textColor="#3E3E3E"
         android:textSize="14sp"
-        android:layout_marginEnd="16dp"
-        app:drawableStartCompat="@drawable/ic_filters"
+        app:layout_constraintBottom_toBottomOf="@+id/ic_popularity"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ic_popularity"
-        app:layout_constraintTop_toBottomOf="@+id/catalogTV" />
+        app:layout_constraintStart_toEndOf="@+id/sortSpinner"
+        app:layout_constraintTop_toTopOf="@+id/ic_popularity"
+        app:drawableStartCompat="@drawable/ic_filters" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_popularity"
+        tools:listitem="@layout/tag_wheel" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
