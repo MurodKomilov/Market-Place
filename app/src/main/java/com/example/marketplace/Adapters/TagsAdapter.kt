@@ -24,28 +24,38 @@ class TagsAdapter(
         fun onBind(item:Tags){
             binding.tagName.text = item.tagName
             if (item.isSelected) {
-                binding.root.background.setColorFilter(0xFF52606D.toInt(), PorterDuff.Mode.SRC_ATOP)
-                binding.tagName.setTextColor(Color.WHITE)
+                binding.apply {    // Работает при нажатии на Тега
+                    root.background.setColorFilter(0xFF52606D.toInt(), PorterDuff.Mode.SRC_ATOP)
+                    tagName.setTextColor(Color.WHITE)
+                    tagName.setText("${item.tagName}  ").toString()
+                    tagName.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
+                        0, 0, R.drawable.ic_tag_clear, 0)
+                }
+
             } else {
-                binding.root.background.setColorFilter(0xFFFFFFFF.toInt(), PorterDuff.Mode.SRC_ATOP)
-                binding.tagName.setTextColor(Color.parseColor("#A0A1A3"))
+                binding.apply {
+                    root.background.setColorFilter(0xFFF8F8F8.toInt(), PorterDuff.Mode.SRC_ATOP)
+                    tagName.setTextColor(Color.parseColor("#A0A1A3"))
+                    tagName.setCompoundDrawablesRelativeWithIntrinsicBounds(       // Показывает иконку крестика
+                        0, 0, 0, 0) }
+
             }
 
             binding.root.setOnClickListener {
-                // Обработка выбора тега
-                handleClick(adapterPosition)
+                handleClick(adapterPosition)             // Обработка выбора тега
             }
         }
 
+        @SuppressLint("NotifyDataSetChanged")
         private fun handleClick(position: Int) {
-            // Сброс всех предыдущих выбранных тегов
-            tags.forEach { it.isSelected = false }
-            // Установка выбранного тега
-            tags[position].isSelected = true
-            // Уведомление об изменении данных в адаптере
-            notifyDataSetChanged()
-            // Уведомление слушателя о выборе тега
-            clickListener.onClickListener(tags[position])
+
+            tags.forEach { it.isSelected = false }        // Сброс всех предыдущих выбранных тегов
+
+            tags[position].isSelected = true              // Установка выбранного тега
+
+            notifyDataSetChanged()                        // Уведомление об изменении данных в адаптере
+
+            clickListener.onClickListener(tags[position]) // Уведомление слушателя о выборе тега
         }
     }
 

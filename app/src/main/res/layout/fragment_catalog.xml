@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/ic_popularity"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:src="@drawable/ic_popularity"
@@ -33,7 +33,7 @@
     <Spinner
         android:id="@+id/sortSpinner"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:spinnerMode="dropdown"
         android:contentDescription="Выбор сортировки"
         app:layout_constraintBottom_toBottomOf="@+id/ic_popularity"
@@ -59,7 +59,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tags"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_marginTop="17dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
