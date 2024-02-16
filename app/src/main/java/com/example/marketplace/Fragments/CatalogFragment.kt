@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.marketplace.Adapters.ClickListener
 import com.example.marketplace.Adapters.TagsAdapter
 import com.example.marketplace.Models.Tags
 import com.example.marketplace.R
@@ -22,7 +23,7 @@ class CatalogFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-      val view = inflater.inflate(R.layout.fragment_catalog, container, false)
+        val view = inflater.inflate(R.layout.fragment_catalog, container, false)
 
         val binding = FragmentCatalogBinding.bind(view)
 
@@ -42,7 +43,11 @@ class CatalogFragment : Fragment() {
 
 
         addData()
-        val tagsAdapter = TagsAdapter(tagList)
+        val tagsAdapter = TagsAdapter(tagList,object: ClickListener{
+            override fun onClickListener(item: Tags) {
+            }
+
+        })
         binding.tags.adapter = tagsAdapter
 
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

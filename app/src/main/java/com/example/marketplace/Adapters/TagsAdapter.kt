@@ -2,6 +2,7 @@ package com.example.marketplace.Adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,13 +20,32 @@ class TagsAdapter(
 
         val binding = TagWheelBinding.bind(itemView)
 
-        @SuppressLint("NotifyDataSetChanged")
+        @SuppressLint("NotifyDataSetChanged", "ResourceAsColor")
         fun onBind(item:Tags){
             binding.tagName.text = item.tagName
-
-            binding.root.setOnClickListener{
-                clickListener.onClickListener(item)
+            if (item.isSelected) {
+                binding.root.background.setColorFilter(0xFF52606D.toInt(), PorterDuff.Mode.SRC_ATOP)
+                binding.tagName.setTextColor(Color.WHITE)
+            } else {
+                binding.root.background.setColorFilter(0xFFFFFFFF.toInt(), PorterDuff.Mode.SRC_ATOP)
+                binding.tagName.setTextColor(Color.parseColor("#A0A1A3"))
             }
+
+            binding.root.setOnClickListener {
+                // Обработка выбора тега
+                handleClick(adapterPosition)
+            }
+        }
+
+        private fun handleClick(position: Int) {
+            // Сброс всех предыдущих выбранных тегов
+            tags.forEach { it.isSelected = false }
+            // Установка выбранного тега
+            tags[position].isSelected = true
+            // Уведомление об изменении данных в адаптере
+            notifyDataSetChanged()
+            // Уведомление слушателя о выборе тега
+            clickListener.onClickListener(tags[position])
         }
     }
 
