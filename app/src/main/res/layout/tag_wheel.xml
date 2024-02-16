@@ -4,6 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingHorizontal="10dp"
+    android:layout_marginStart="10dp"
     android:clickable="true"
     android:focusable="true"
     android:background="@drawable/tag_wheel_background">
