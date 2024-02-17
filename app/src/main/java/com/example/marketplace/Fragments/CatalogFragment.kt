@@ -9,12 +9,17 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.marketplace.Adapters.ClickListener
+import com.example.marketplace.Adapters.ProductAdapter
 import com.example.marketplace.Adapters.TagsAdapter
+import com.example.marketplace.Models.Products
 import com.example.marketplace.Models.Tags
 import com.example.marketplace.R
 import com.example.marketplace.databinding.FragmentCatalogBinding
+import com.google.gson.Gson
+import java.io.InputStream
 
 class CatalogFragment : Fragment() {
     var tagList = ArrayList<Tags>()
@@ -51,6 +56,8 @@ class CatalogFragment : Fragment() {
         binding.tags.adapter = tagsAdapter
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+
+
         return view
 
     }
@@ -61,6 +68,13 @@ class CatalogFragment : Fragment() {
         tagList.add(Tags("Тело"))
         tagList.add(Tags("Загар"))
         tagList.add(Tags("Маски"))
+    }
+
+    fun addDataProduct():List<Products>{
+        val inputStream: InputStream = resources.openRawResource(R.raw.item)
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+        val products = Gson().fromJson(jsonString, Array<Products>::class.java).toList()
+        return products
     }
 
 
