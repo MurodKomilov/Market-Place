@@ -31,13 +31,13 @@ class CatalogFragment : Fragment() {
             adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
             binding.sortSpinner.adapter = adapter
-            binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {     // Функция для обоаботки кнопок сортировки
 
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    val selectedItem = parent?.getItemAtPosition(position).toString()
+                    val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
 
                 }
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+                override fun onNothingSelected(parent: AdapterView<*>?) {              // Функция для невыбранного
 
                 }
             }
@@ -45,7 +45,9 @@ class CatalogFragment : Fragment() {
 
         addData()
         val tagsAdapter = TagsAdapter(tagList,object: ClickListener{
-            override fun onClickListener(item: Tags) {  } })
+            override fun onClickListener(item: Tags) {                                  // Функция для выбранного Тэга
+
+            } })
         binding.tags.adapter = tagsAdapter
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 

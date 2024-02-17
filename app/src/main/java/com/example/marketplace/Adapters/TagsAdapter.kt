@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView.OnChildClickListener
@@ -49,14 +50,20 @@ class TagsAdapter(
         @SuppressLint("NotifyDataSetChanged")
         private fun handleClick(position: Int) {
 
-            tags.forEach { it.isSelected = false }        // Сброс всех предыдущих выбранных тегов
-
-            tags[position].isSelected = true              // Установка выбранного тега
-
-            notifyDataSetChanged()                        // Уведомление об изменении данных в адаптере
-
-            clickListener.onClickListener(tags[position]) // Уведомление слушателя о выборе тега
+            val selectedTag = tags[position]
+            if (selectedTag.isSelected) {
+                selectedTag.isSelected = false              // Снимаем выбор с тега
+                notifyDataSetChanged()                      // Уведомление об изменении данных в адаптере
+                clickListener.onClickListener(selectedTag)  // Уведомление слушателя о снятии выбора с тега
+            } else {
+                // Если тег не был выбран, то переходим к его обработке как обычно
+                tags.forEach { it.isSelected = false }      // Сброс всех предыдущих выбранных тегов
+                selectedTag.isSelected = true               // Установка выбранного тега
+                notifyDataSetChanged()                      // Уведомление об изменении данных в адаптере
+                clickListener.onClickListener(selectedTag)  // Уведомление слушателя о выборе тега
+            }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TagViewHolder {
