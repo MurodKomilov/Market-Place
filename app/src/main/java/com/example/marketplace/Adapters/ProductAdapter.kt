@@ -8,18 +8,15 @@ import com.example.marketplace.Models.Products
 import com.example.marketplace.R
 import com.example.marketplace.databinding.ProductItemBinding
 
-class ProductAdapter(
-    var product:List<Products>,
-    var clickListener: ClickListener):RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(private val product: List<Products>):RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
         var binding = ProductItemBinding.bind(itemView)
 
-        fun onBind(item:Products){
-
-
-
+        fun onBind(item: Products) {
+            binding.productName.text = item.title
+            binding.subtitle.text = item.subtitle
         }
 
     }

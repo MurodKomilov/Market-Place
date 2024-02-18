@@ -1,7 +1,10 @@
 package com.example.marketplace.Fragments
 
+import android.content.Context
+import android.content.res.Resources
 import android.nfc.Tag
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +22,15 @@ import com.example.marketplace.Models.Tags
 import com.example.marketplace.R
 import com.example.marketplace.databinding.FragmentCatalogBinding
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.BufferedReader
+import java.io.File
 import java.io.InputStream
+import java.io.InputStreamReader
 
 class CatalogFragment : Fragment() {
     var tagList = ArrayList<Tags>()
+    var productsList = ArrayList<Products>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,10 +64,12 @@ class CatalogFragment : Fragment() {
         binding.tags.adapter = tagsAdapter
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+        val items = loadItemsFromJson(requireContext())
+        val productAdapter = ProductAdapter(items)
+        binding.products.adapter = productAdapter
 
 
         return view
-
     }
 
     fun addData(){
@@ -69,12 +79,11 @@ class CatalogFragment : Fragment() {
         tagList.add(Tags("Загар"))
         tagList.add(Tags("Маски"))
     }
-
-    fun addDataProduct():List<Products>{
-        val inputStream: InputStream = resources.openRawResource(R.raw.item)
-        val jsonString = inputStream.bufferedReader().use { it.readText() }
-        val products = Gson().fromJson(jsonString, Array<Products>::class.java).toList()
-        return products
+    fun loadItemsFromJson(context: Context): List<Products> {
+        val inputStream = context.resources.openRawResource(R.raw.item)
+        val json = inputStream.bufferedReader().use { it.readText() }
+        val itemType = object : TypeToken<List<Products>>() {}.type
+        return Gson().fromJson(json, itemType)
     }
 
 
