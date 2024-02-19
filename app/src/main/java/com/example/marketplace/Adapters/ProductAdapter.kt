@@ -1,5 +1,9 @@
 package com.example.marketplace.Adapters
 
+import android.graphics.Paint
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +19,13 @@ class ProductAdapter(private val product: List<Products>):RecyclerView.Adapter<P
         var binding = ProductItemBinding.bind(itemView)
 
         fun onBind(item: Products) {
+
+            binding.oldPrice.paintFlags =  Paint.STRIKE_THRU_TEXT_FLAG
+
             binding.productName.text = item.title
             binding.subtitle.text = item.subtitle
+            binding.ratingTv.text = "  ${item.feedback.rating}"
+
         }
 
     }
