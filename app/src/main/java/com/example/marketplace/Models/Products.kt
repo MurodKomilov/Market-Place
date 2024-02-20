@@ -1,7 +1,7 @@
 package com.example.marketplace.Models
 
 data class Products(
-    val id: String,
+    val id: Int,
     val title: String,
     val subtitle: String,
     val price: Price,
@@ -12,6 +12,7 @@ data class Products(
     val info: List<Info>,
     val ingredients: String
 )
+
 
 data class Price(
     val price: String,

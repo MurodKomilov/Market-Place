@@ -1,6 +1,6 @@
 [
     {
-      "id": "cbf0c984-7c6c-4ada-82da-e29dc698bb50",
+      "id": 1,
       "title": "ESFOLIO",
       "subtitle": "Лосьон для тела `ESFOLIO` COENZYME Q10 Увлажняющий 500 мл",
       "price": {
@@ -35,7 +35,7 @@
       "ingredients": "Glycerin Palmitic Acid, Stearic Acid, Capric Acid, Sodium Benzoate"
     },
     {
-      "id": "54a876a5-2205-48ba-9498-cfecff4baa6e",
+      "id": 2,
       "title": "A`PIEU",
       "subtitle": "Пенка для умывания A`PIEU` `DEEP CLEAN` 200  мл ",
       "price": {
@@ -70,7 +70,7 @@
       "ingredients": "Water, Glycerin Palmitic Acid, Stearic Acid, Myristic Acid, Potassium Hydroxide, Lauric Acid, Cocamidopropyl Betaine, Tea-Lauryl Sulfate, Phenoxyethanol, Sodium Chloride, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Arachidic Acid, Fragrance, Cellulose Gum, Disodium Edta, Capric Acid, Sodium Benzoate"
     },
     {
-      "id": "75c84407-52e1-4cce-a73a-ff2d3ac031b3",
+      "id": 3,
       "title": "DECO.",
       "subtitle": "Салфетки для лица `DECO.` матирующие с экстрактом зеленого чая 100 шт",
       "price": {
@@ -105,7 +105,7 @@
       "ingredients": "Myristic Acid, Potassium Hydroxide, Lauric Acid, Cocamidopropyl Betaine, Tea-Lauryl Sulfate, Phenoxyethanol, Sodium Chloride, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Arachidic Acid, Fragrance, Cellulose Gum, Disodium Edta, Capric Acid, Sodium Benzoate"
     },
     {
-      "id": "16f88865-ae74-4b7c-9d85-b68334bb97db",
+      "id": 4,
       "title": "LP CARE",
       "subtitle": "Маска-перчатки для рук `LP-CARE` увлажняющая 40 мл",
       "price": {
@@ -141,7 +141,7 @@
       "ingredients": "Water, Glycerin Palmitic Acid, Cocamidopropyl Betaine, Tea-Lauryl Sulfate, Phenoxyethanol, Sodium Chloride, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Arachidic Acid, Fragrance, Cellulose Gum, Disodium Edta, Capric Acid, Sodium Benzoate"
     },
     {
-      "id": "26f88856-ae74-4b7c-9d85-b68334bb97db",
+      "id": 5,
       "title": "EVO",
       "subtitle": "Молочко для тела Пантенол 250 мл",
       "price": {
@@ -172,7 +172,7 @@
       "ingredients": "Water, Sorbitol, Isopropyl Palmitate, Panthenol, Cetearyl Alcohol (and) Potassium Cetyl Phosphate"
     },
     {
-      "id": "15f88865-ae74-4b7c-9d81-b78334bb97db",
+      "id": 6,
       "title": "Aravia Professional",
       "subtitle": "Маска с поросуживающим эффектом Aravia Professional Post-Acne Balance Mask 100 мл",
       "price": {
@@ -208,7 +208,7 @@
       "ingredients": "Cocamidopropyl Betaine, Tea-Lauryl Sulfate, Phenoxyethanol, Sodium Chloride, Acrylates/C10-30 Alkyl Acrylate Crosspolymer, Arachidic Acid, Fragrance, Cellulose Gum, Disodium Edta, Capric Acid, Sodium Benzoate"
     },
     {
-      "id": "88f88865-ae74-4b7c-9d81-b78334bb97db",
+      "id": 7,
       "title": "Floresan",
       "subtitle": "Масло водостойкое Floresan Активатор загара SPF 20 150 мл",
       "price": {
@@ -239,7 +239,7 @@
       "ingredients": "вода питьевая; масло парфюмерное; масло соевое; циклометикон; этилгексил метоксициннамат; изопропил пальмитат; экстракт моркови; масло Ши; пропиленгликоль; витамин Е; натрия хлорид; гидантоин; ?-каротин; Д-пантенол; парфюмерная композиция; лимонен; амилциннамал"
     },
     {
-      "id": "55f58865-ae74-4b7c-9d81-b78334bb97db",
+      "id": 8,
       "title": "Floresan",
       "subtitle": "Масло для загара Floresan Гавайское",
       "price": {

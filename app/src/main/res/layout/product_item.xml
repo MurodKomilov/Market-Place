@@ -4,90 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="315dp"
-    android:layout_marginVertical="3dp"
     android:layout_marginHorizontal="3dp"
+    android:layout_marginVertical="3dp"
     android:background="@drawable/product_item_background">
 
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="0dp"
-                android:layout_height="157dp"
-                android:src="@drawable/photo1"
-                android:layout_marginTop="1dp"
-                android:layout_marginHorizontal="4dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/imageVP"
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginTop="1dp"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintTop_toBottomOf="@+id/imageVP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:layout_width="22dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/ic_heart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/old_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="749 ₽"
+        android:textColor="#A0A1A3"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/price_shelf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/old_price">
 
         <TextView
-            android:id="@+id/old_price"
+            android:id="@+id/new_price"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:text="749 ₽"
-            android:textColor="#A0A1A3"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/price_shelf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/old_price">
-
-            <TextView
-                android:id="@+id/new_price"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="489 ₽"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:background="@drawable/price_promotion_background"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/new_price"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/discount"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="-35%"
-                    android:textColor="@color/white"
-                    android:textSize="11sp" />
-            </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="6dp"
             android:fontFamily="@font/inter_medium"
-            android:text="ESFOLIO"
+            android:text="489 ₽"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/price_shelf" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/price_promotion_background"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/new_price"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/discount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="-35%"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="ESFOLIO"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price_shelf" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -99,7 +118,6 @@
         android:text="Лосьон для тела`ESFOLIO` COENZYME Q 10 Увлажняющий 500 мл"
         android:textColor="#3E3E3E"
         android:textSize="11sp"
-
         app:layout_constraintBottom_toTopOf="@id/rating_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -108,44 +126,45 @@
         app:layout_constraintVertical_bias="0" />
 
 
-        <TextView
-            android:id="@+id/rating_tv"
+    <TextView
+        android:id="@+id/rating_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginBottom="2dp"
+        android:drawableStart="@drawable/ic_star"
+        android:text="  4.5"
+        android:textColor="#F9A249"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@id/add_basket"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1" />
+
+    <TextView
+        android:id="@+id/reviews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:text="(51)"
+        android:textColor="#A0A1A3"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/rating_tv"
+        app:layout_constraintStart_toEndOf="@+id/rating_tv"
+        app:layout_constraintTop_toTopOf="@+id/rating_tv" />
+
+    <LinearLayout
+        android:id="@+id/add_basket"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/add_basket_background"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:drawableStart="@drawable/ic_star"
-            android:text="  4.5"
-            android:textColor="#F9A249"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/add_basket"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1" />
-
-        <TextView
-            android:id="@+id/reviews"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:text="(51)"
-            android:textColor="#A0A1A3"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/rating_tv"
-            app:layout_constraintStart_toEndOf="@+id/rating_tv"
-            app:layout_constraintTop_toTopOf="@+id/rating_tv" />
-
-        <LinearLayout
-            android:id="@+id/add_basket"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@drawable/add_basket_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_plus"
-                android:textSize="30sp" />
-        </LinearLayout>
+            android:src="@drawable/ic_plus" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
