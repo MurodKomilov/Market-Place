@@ -40,21 +40,6 @@ class CatalogFragment : Fragment() {
 
         val binding = FragmentCatalogBinding.bind(view)
 
-            var adapter = activity?.let { ArrayAdapter.createFromResource(it.baseContext,R.array.sortNames,android.R.layout.simple_spinner_item) }
-            adapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-            binding.sortSpinner.adapter = adapter
-            binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {     // Функция для обоаботки кнопок сортировки
-
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
-
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {              // Функция для невыбранного
-
-                }
-            }
-
 
         addData()
         val tagsAdapter = TagsAdapter(tagList,object: ClickListener{
@@ -64,9 +49,43 @@ class CatalogFragment : Fragment() {
         binding.tags.adapter = tagsAdapter
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        val items = loadItemsFromJson(requireContext())
-        val productAdapter = ProductAdapter(items)
-        binding.products.adapter = productAdapter
+        var jsonData = loadItemsFromJson(requireContext())
+
+        val sortName = listOf("", "По популярности", "По уменьшению цены", "По возрастанию цены")
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sortName)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+        binding.sortSpinner.adapter = adapter
+        binding.sortSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {     // Функция для обоаботки кнопок сортировки
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
+
+                when (selectedItem) {
+                    "" -> {
+                        var productAdapter = ProductAdapter(jsonData)
+                        binding.products.adapter = productAdapter }
+                    "По популярности" -> {
+                        var newItems = jsonData.sortedByDescending { it.feedback.rating }
+                        var productAdapter = ProductAdapter(newItems)
+                        binding.products.adapter = productAdapter }
+                    "По уменьшению цены" -> {
+                        var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
+                        var productAdapter = ProductAdapter(newItems)
+                        binding.products.adapter = productAdapter }
+                    "По возрастанию цены" -> {
+                        var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
+                        var productAdapter = ProductAdapter(newItems)
+                        binding.products.adapter = productAdapter }
+                }
+
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {              // Функция для невыбранного
+
+            }
+        }
 
 
         return view

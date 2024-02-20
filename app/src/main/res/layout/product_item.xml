@@ -23,8 +23,10 @@
 
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="13dp"
+        android:scrollbarSize="1dp"
+        app:ci_drawable="@drawable/circle_indicator_background"
         android:layout_alignParentBottom="true"
         app:layout_constraintTop_toBottomOf="@+id/imageVP"
         app:layout_constraintEnd_toEndOf="parent"
