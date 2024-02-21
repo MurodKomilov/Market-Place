@@ -1,28 +1,26 @@
 package com.example.marketplace.Adapters
 
 import android.graphics.Paint
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.example.marketplace.Fragments.ProductFragment
 import com.example.marketplace.Models.Products
+import com.example.marketplace.Models.Tags
 import com.example.marketplace.R
+import com.example.marketplace.databinding.FragmentProductBinding
 import com.example.marketplace.databinding.ProductItemBinding
 import com.example.myapplication.ViewPagerAdapter
 
-class ProductAdapter(var product: List<Products>) :
+class ProductAdapter(var product: List<Products>, var onClickListener:ClickListener) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    private var onItemClick: ((Products) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Products) -> Unit) {
-        onItemClick = listener
+    interface ClickListener{
+        fun onClickItem(product: Products,imageList:ArrayList<Int>)
     }
 
 
@@ -31,7 +29,7 @@ class ProductAdapter(var product: List<Products>) :
         var binding = ProductItemBinding.bind(itemView)
         fun onBind(item: Products) {
 
-            var imageList = mutableListOf<Int>()
+            var imageList = ArrayList<Int>()
             when (item.id) {
                 1 -> {
                     imageList.add(R.drawable.photo6)
@@ -67,6 +65,9 @@ class ProductAdapter(var product: List<Products>) :
                 }
                 else -> ""
             }
+            binding.root.setOnClickListener {
+                onClickListener.onClickItem(item, imageList)
+            }
 
             binding.apply {
                 imageVP.adapter = ViewPagerAdapter(imageList)
@@ -83,6 +84,7 @@ class ProductAdapter(var product: List<Products>) :
                 ratingTv.text = "  ${item.feedback.rating}"
                 reviews.text = "(${item.feedback.count})"
             }
+
         }
 
     }
@@ -95,12 +97,9 @@ class ProductAdapter(var product: List<Products>) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.onBind(product[position])
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(product[position])
-        }
-
     }
 
     override fun getItemCount(): Int = product.size
+
 
 }

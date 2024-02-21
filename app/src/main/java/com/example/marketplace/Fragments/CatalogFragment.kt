@@ -1,34 +1,27 @@
 package com.example.marketplace.Fragments
 
 import android.content.Context
-import android.content.res.Resources
-import android.nfc.Tag
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.marketplace.Adapters.ClickListener
 import com.example.marketplace.Adapters.ProductAdapter
 import com.example.marketplace.Adapters.TagsAdapter
 import com.example.marketplace.Models.Products
 import com.example.marketplace.Models.Tags
+import com.example.marketplace.ProductActivity
 import com.example.marketplace.R
 import com.example.marketplace.databinding.FragmentCatalogBinding
+import com.example.marketplace.databinding.FragmentProductBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.io.BufferedReader
-import java.io.File
-import java.io.InputStream
-import java.io.InputStreamReader
 
 class CatalogFragment : Fragment() {
     var tagList = ArrayList<Tags>()
@@ -40,7 +33,6 @@ class CatalogFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_catalog, container, false)
 
         val binding = FragmentCatalogBinding.bind(view)
-
 
         addData()
         val tagsAdapter = TagsAdapter(tagList,object: ClickListener{
@@ -66,35 +58,47 @@ class CatalogFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
 
-                when (selectedItem) {
+                when (selectedItem) {           // Функция для обоаботки кнопок сортировки
                     "" -> {
-                        var productAdapter = ProductAdapter(jsonData)
-                        productAdapter.setOnItemClickListener {
-                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
-                        }
+                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                            override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
+                                var productList = ArrayList<Products>()
+                                productList.add(product)
+                                val intent = Intent(requireContext(), ProductActivity::class.java)
+                                intent.putExtra("productList", Gson().toJson(productList))
+                                intent.putExtra("imageList", Gson().toJson(imageList))
+                                startActivity(intent)
+                            }
+
+                        })
                         binding.products.adapter = productAdapter
                     }
-                    "По популярности" -> {
-                        var newItems = jsonData.sortedByDescending { it.feedback.rating }
-                        var productAdapter = ProductAdapter(newItems)
-                        productAdapter.setOnItemClickListener {
-                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
-                        }
-                        binding.products.adapter = productAdapter }
-                    "По уменьшению цены" -> {
-                        var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
-                        var productAdapter = ProductAdapter(newItems)
-                        productAdapter.setOnItemClickListener {
-                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
-                        }
-                        binding.products.adapter = productAdapter }
-                    "По возрастанию цены" -> {
-                        var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
-                        var productAdapter = ProductAdapter(newItems)
-                        productAdapter.setOnItemClickListener {
-                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
-                        }
-                        binding.products.adapter = productAdapter }
+//                    "По популярности" -> {
+//                        var newItems = jsonData.sortedByDescending { it.feedback.rating }
+//                        var productAdapter = ProductAdapter(newItems, object: ProductAdapter.ClickListener{
+//                            override fun onClickItem(product: Products) {
+//
+//                            }
+//
+//                        })
+//                        productAdapter.setOnItemClickListener {
+//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
+//                        }
+//                        binding.products.adapter = productAdapter }
+//                    "По уменьшению цены" -> {
+//                        var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
+//                        var productAdapter = ProductAdapter(newItems)
+//                        productAdapter.setOnItemClickListener {
+//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
+//                        }
+//                        binding.products.adapter = productAdapter }
+//                    "По возрастанию цены" -> {
+//                        var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
+//                        var productAdapter = ProductAdapter(newItems)
+//                        productAdapter.setOnItemClickListener {
+//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
+//                        }
+//                        binding.products.adapter = productAdapter }
                 }
 
 
