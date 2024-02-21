@@ -119,7 +119,7 @@
         android:fontFamily="@font/inter"
         android:text="Лосьон для тела`ESFOLIO` COENZYME Q 10 Увлажняющий 500 мл"
         android:textColor="#3E3E3E"
-        android:textSize="11sp"
+        android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@id/rating_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
@@ -138,6 +138,7 @@
         android:text="  4.5"
         android:textColor="#F9A249"
         android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
         app:layout_constraintBottom_toTopOf="@id/add_basket"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="1" />

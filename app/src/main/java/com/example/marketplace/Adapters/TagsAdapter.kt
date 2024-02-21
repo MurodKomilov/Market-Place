@@ -14,7 +14,7 @@ import com.example.marketplace.R
 import com.example.marketplace.databinding.TagWheelBinding
 
 class TagsAdapter(
-    var tags:ArrayList<Tags>,
+    var tags:List<Tags>,
     var clickListener: ClickListener):RecyclerView.Adapter<TagsAdapter.TagViewHolder>() {
 
     inner class TagViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){

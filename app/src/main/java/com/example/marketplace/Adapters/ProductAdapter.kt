@@ -7,6 +7,8 @@ import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.marketplace.Models.Products
@@ -17,15 +19,17 @@ import com.example.myapplication.ViewPagerAdapter
 class ProductAdapter(var product: List<Products>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
+    private var onItemClick: ((Products) -> Unit)? = null
 
+    fun setOnItemClickListener(listener: (Products) -> Unit) {
+        onItemClick = listener
+    }
 
 
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var binding = ProductItemBinding.bind(itemView)
-
         fun onBind(item: Products) {
-
 
             var imageList = mutableListOf<Int>()
             when (item.id) {
@@ -64,20 +68,21 @@ class ProductAdapter(var product: List<Products>) :
                 else -> ""
             }
 
-            binding.imageVP.adapter = ViewPagerAdapter(imageList)
-            binding.imageVP.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            binding.indicator.setViewPager(binding.imageVP)
+            binding.apply {
+                imageVP.adapter = ViewPagerAdapter(imageList)
+                imageVP.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                indicator.setViewPager(binding.imageVP)
 
-            binding.oldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                oldPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-            binding.productName.text = item.title
-            binding.subtitle.text = item.subtitle
-            binding.oldPrice.text = "${item.price.price} ₽"
-            binding.newPrice.text = item.price.priceWithDiscount
-            binding.discount.text = "-${item.price.discount} ₽"
-            binding.ratingTv.text = "  ${item.feedback.rating}"
-            binding.reviews.text = "(${item.feedback.count})"
-
+                productName.text = item.title
+                subtitle.text = item.subtitle
+                oldPrice.text = "${item.price.price} ₽"
+                newPrice.text = "${item.price.priceWithDiscount} ₽"
+                discount.text = "-${item.price.discount} %"
+                ratingTv.text = "  ${item.feedback.rating}"
+                reviews.text = "(${item.feedback.count})"
+            }
         }
 
     }
@@ -90,6 +95,9 @@ class ProductAdapter(var product: List<Products>) :
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.onBind(product[position])
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(product[position])
+        }
 
     }
 

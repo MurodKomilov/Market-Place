@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.marketplace.Adapters.ClickListener
@@ -30,7 +32,6 @@ import java.io.InputStreamReader
 
 class CatalogFragment : Fragment() {
     var tagList = ArrayList<Tags>()
-    var productsList = ArrayList<Products>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +50,10 @@ class CatalogFragment : Fragment() {
         binding.tags.adapter = tagsAdapter
         binding.tags.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
+
         var jsonData = loadItemsFromJson(requireContext())
+
+
 
         val sortName = listOf("", "По популярности", "По уменьшению цены", "По возрастанию цены")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sortName)
@@ -65,18 +69,31 @@ class CatalogFragment : Fragment() {
                 when (selectedItem) {
                     "" -> {
                         var productAdapter = ProductAdapter(jsonData)
-                        binding.products.adapter = productAdapter }
+                        productAdapter.setOnItemClickListener {
+                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
+                        }
+                        binding.products.adapter = productAdapter
+                    }
                     "По популярности" -> {
                         var newItems = jsonData.sortedByDescending { it.feedback.rating }
                         var productAdapter = ProductAdapter(newItems)
+                        productAdapter.setOnItemClickListener {
+                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
+                        }
                         binding.products.adapter = productAdapter }
                     "По уменьшению цены" -> {
                         var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
                         var productAdapter = ProductAdapter(newItems)
+                        productAdapter.setOnItemClickListener {
+                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
+                        }
                         binding.products.adapter = productAdapter }
                     "По возрастанию цены" -> {
                         var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
                         var productAdapter = ProductAdapter(newItems)
+                        productAdapter.setOnItemClickListener {
+                            findNavController().navigate(R.id.action_catalogFragment_to_productMenuFragment)
+                        }
                         binding.products.adapter = productAdapter }
                 }
 
@@ -86,6 +103,7 @@ class CatalogFragment : Fragment() {
 
             }
         }
+
 
 
         return view
