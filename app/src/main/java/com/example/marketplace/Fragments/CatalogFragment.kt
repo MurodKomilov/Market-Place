@@ -57,7 +57,7 @@ class CatalogFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
 
-                when (selectedItem) {           // Функция для обоаботки кнопок сортировки
+                when (selectedItem) {
                     "" -> {
                         var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
                             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
@@ -68,10 +68,10 @@ class CatalogFragment : Fragment() {
                                 intent.putExtra("imageList", Gson().toJson(imageList))
                                 startActivity(intent)
                             } })
-                        binding.products.adapter = productAdapter
-                    }
+                        binding.products.adapter = productAdapter }
                     "По популярности" -> {
-                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                        var newItems = jsonData.sortedByDescending { it.feedback.rating }
+                        var productAdapter = ProductAdapter(newItems, object: ProductAdapter.ClickListener{
                             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
                                 var productList = ArrayList<Products>()
                                 productList.add(product)
@@ -80,10 +80,10 @@ class CatalogFragment : Fragment() {
                                 intent.putExtra("imageList", Gson().toJson(imageList))
                                 startActivity(intent)
                             } })
-                        binding.products.adapter = productAdapter
-                        }
+                        binding.products.adapter = productAdapter }
                     "По уменьшению цены" -> {
-                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                        var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
+                        var productAdapter = ProductAdapter(newItems, object: ProductAdapter.ClickListener{
                             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
                                 var productList = ArrayList<Products>()
                                 productList.add(product)
@@ -92,9 +92,10 @@ class CatalogFragment : Fragment() {
                                 intent.putExtra("imageList", Gson().toJson(imageList))
                                 startActivity(intent)
                             } })
-                        binding.products.adapter = productAdapter}
+                        binding.products.adapter = productAdapter }
                     "По возрастанию цены" -> {
-                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                        var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
+                        var productAdapter = ProductAdapter(newItems, object: ProductAdapter.ClickListener{
                             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
                                 var productList = ArrayList<Products>()
                                 productList.add(product)
@@ -103,7 +104,7 @@ class CatalogFragment : Fragment() {
                                 intent.putExtra("imageList", Gson().toJson(imageList))
                                 startActivity(intent)
                             } })
-                        binding.products.adapter = productAdapter}
+                        binding.products.adapter = productAdapter }
                 }
 
 

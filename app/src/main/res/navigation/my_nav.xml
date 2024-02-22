@@ -15,11 +15,7 @@
         android:id="@+id/catalogFragment"
         android:name="com.example.marketplace.Fragments.CatalogFragment"
         android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog" >
-        <action
-            android:id="@+id/action_catalogFragment_to_productMenuFragment"
-            app:destination="@id/productMenuFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_catalog" />
     <fragment
         android:id="@+id/basketFragment"
         android:name="com.example.marketplace.Fragments.BasketFragment"

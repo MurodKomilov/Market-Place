@@ -17,6 +17,7 @@ class ProductActivity : AppCompatActivity() {
         binding = ActivityProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val product = intent.getStringExtra("productList")
         val productList: ArrayList<Products> = Gson().fromJson(product, object : TypeToken<ArrayList<Products>>() {}.type)
 
