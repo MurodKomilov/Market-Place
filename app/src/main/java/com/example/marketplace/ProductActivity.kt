@@ -22,12 +22,12 @@ class ProductActivity : AppCompatActivity() {
 
         val image = intent.getStringExtra("imageList")
         val imageList: ArrayList<Int> = Gson().fromJson(image, object : TypeToken<ArrayList<Int>>() {}.type)
-        Log.d("ImageList", "$imageList")
+
         binding.imageVpA.adapter = ViewPagerAdapter(imageList)
         binding.imageVpA.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         binding.indicatorA.setViewPager(binding.imageVpA)
 
-        binding.productName1A.text = productList[0].title
+        binding.productNameA.text = productList[0].title
 
 
     }

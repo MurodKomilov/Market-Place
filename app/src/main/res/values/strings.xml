@@ -3,5 +3,7 @@
     <string name="required">required</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="structure">Water, Propylene Glycol, Dipropylene Glycol, Lauric acid, Myristic Acid, Potassium Hydroxide, Lauryl Hydroxysultaine, Potassium Cocoate, Potassium Cocoyl Glycinate, Sodium Chloride, Glycerin, Phenoxyethanol, Chlorphenesin, Fragrance, Caprylyl Glycol, Ethylhexylglycerin, Capric acid, Palmitic Acid, Disodium EDTA, Sodium Bicarbonate, Cocamidopropyl Betaine, Butylene Glycol.</string>
+    <string name="description">Пенка для лица Глубокое очищение содержит минеральную воду и соду,способствует глубокому очищению пор от различных загрязнений, контролирует работу сальных желез,сужает поры. Обладает мягким антисептическим действием, не пересушивая кожу.Минеральная вода тонизирует и смягчает кожу.</string>
 
 </resources>

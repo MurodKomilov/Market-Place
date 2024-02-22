@@ -4,14 +4,10 @@ import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.marketplace.Fragments.ProductFragment
 import com.example.marketplace.Models.Products
-import com.example.marketplace.Models.Tags
 import com.example.marketplace.R
-import com.example.marketplace.databinding.FragmentProductBinding
 import com.example.marketplace.databinding.ProductItemBinding
 import com.example.myapplication.ViewPagerAdapter
 

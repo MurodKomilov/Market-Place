@@ -19,7 +19,6 @@ import com.example.marketplace.Models.Tags
 import com.example.marketplace.ProductActivity
 import com.example.marketplace.R
 import com.example.marketplace.databinding.FragmentCatalogBinding
-import com.example.marketplace.databinding.FragmentProductBinding
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -68,37 +67,43 @@ class CatalogFragment : Fragment() {
                                 intent.putExtra("productList", Gson().toJson(productList))
                                 intent.putExtra("imageList", Gson().toJson(imageList))
                                 startActivity(intent)
-                            }
-
-                        })
+                            } })
                         binding.products.adapter = productAdapter
                     }
-//                    "По популярности" -> {
-//                        var newItems = jsonData.sortedByDescending { it.feedback.rating }
-//                        var productAdapter = ProductAdapter(newItems, object: ProductAdapter.ClickListener{
-//                            override fun onClickItem(product: Products) {
-//
-//                            }
-//
-//                        })
-//                        productAdapter.setOnItemClickListener {
-//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
-//                        }
-//                        binding.products.adapter = productAdapter }
-//                    "По уменьшению цены" -> {
-//                        var newItems = jsonData.sortedByDescending { it.price.priceWithDiscount.toInt()}
-//                        var productAdapter = ProductAdapter(newItems)
-//                        productAdapter.setOnItemClickListener {
-//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
-//                        }
-//                        binding.products.adapter = productAdapter }
-//                    "По возрастанию цены" -> {
-//                        var newItems = jsonData.sortedBy { it.price.priceWithDiscount.toInt()}
-//                        var productAdapter = ProductAdapter(newItems)
-//                        productAdapter.setOnItemClickListener {
-//                            findNavController().navigate(R.id.action_catalogFragment_to_productFragment)
-//                        }
-//                        binding.products.adapter = productAdapter }
+                    "По популярности" -> {
+                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                            override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
+                                var productList = ArrayList<Products>()
+                                productList.add(product)
+                                val intent = Intent(requireContext(), ProductActivity::class.java)
+                                intent.putExtra("productList", Gson().toJson(productList))
+                                intent.putExtra("imageList", Gson().toJson(imageList))
+                                startActivity(intent)
+                            } })
+                        binding.products.adapter = productAdapter
+                        }
+                    "По уменьшению цены" -> {
+                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                            override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
+                                var productList = ArrayList<Products>()
+                                productList.add(product)
+                                val intent = Intent(requireContext(), ProductActivity::class.java)
+                                intent.putExtra("productList", Gson().toJson(productList))
+                                intent.putExtra("imageList", Gson().toJson(imageList))
+                                startActivity(intent)
+                            } })
+                        binding.products.adapter = productAdapter}
+                    "По возрастанию цены" -> {
+                        var productAdapter = ProductAdapter(jsonData, object: ProductAdapter.ClickListener{
+                            override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
+                                var productList = ArrayList<Products>()
+                                productList.add(product)
+                                val intent = Intent(requireContext(), ProductActivity::class.java)
+                                intent.putExtra("productList", Gson().toJson(productList))
+                                intent.putExtra("imageList", Gson().toJson(imageList))
+                                startActivity(intent)
+                            } })
+                        binding.products.adapter = productAdapter}
                 }
 
 
