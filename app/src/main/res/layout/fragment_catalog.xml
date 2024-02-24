@@ -34,6 +34,7 @@
         android:id="@+id/sortSpinner"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
+        android:dropDownWidth="100dp"
         android:spinnerMode="dropdown"
         android:contentDescription="Выбор сортировки"
         app:layout_constraintBottom_toBottomOf="@+id/ic_popularity"

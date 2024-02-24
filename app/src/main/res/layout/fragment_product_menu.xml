@@ -33,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/image_vpA"
+            android:id="@+id/image_vp"
             android:layout_width="match_parent"
             android:layout_height="368dp"
             android:layout_centerInParent="true"
@@ -43,19 +43,19 @@
             app:layout_constraintTop_toBottomOf="@+id/ic_back" />
 
         <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/indicatorA"
+            android:id="@+id/indicator"
             android:layout_width="wrap_content"
             android:layout_height="13dp"
             android:scrollbarSize="1dp"
             app:ci_drawable="@drawable/circle_indicator_background"
             android:layout_alignParentBottom="true"
-            app:layout_constraintTop_toBottomOf="@+id/image_vpA"
+            app:layout_constraintTop_toBottomOf="@+id/image_vp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
 
         <TextView
-            android:id="@+id/productNameA"
+            android:id="@+id/productName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="A`PIEU"
@@ -64,10 +64,10 @@
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indicatorA" />
+            app:layout_constraintTop_toBottomOf="@+id/indicator" />
 
         <TextView
-            android:id="@+id/subtitleA"
+            android:id="@+id/subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Пенка для умывания`A`PIEU` `DEEP CLEAN` 200 мл"
@@ -77,7 +77,7 @@
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/productNameA" />
+            app:layout_constraintTop_toBottomOf="@+id/productName" />
 
         <TextView
             android:id="@+id/left"
@@ -89,7 +89,7 @@
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/subtitleA" />
+            app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
         <LinearLayout
             android:id="@+id/feedback"
@@ -104,7 +104,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/newPriceA"
+            android:id="@+id/newPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="549 ₽"
@@ -115,16 +115,16 @@
             app:layout_constraintTop_toBottomOf="@+id/feedback" />
 
         <TextView
-            android:id="@+id/oldPriceA"
+            android:id="@+id/oldPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="899 ₽"
             android:textSize="12sp"
             android:textColor="#A0A1A3"
             android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/newPriceA"
-            app:layout_constraintStart_toEndOf="@+id/newPriceA"
-            app:layout_constraintTop_toTopOf="@+id/newPriceA" />
+            app:layout_constraintBottom_toBottomOf="@+id/newPrice"
+            app:layout_constraintStart_toEndOf="@+id/newPrice"
+            app:layout_constraintTop_toTopOf="@+id/newPrice" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -133,9 +133,9 @@
             android:background="@drawable/price_promotion_background"
             android:paddingHorizontal="8dp"
             android:paddingVertical="2dp"
-            app:layout_constraintBottom_toBottomOf="@id/newPriceA"
-            app:layout_constraintStart_toEndOf="@id/oldPriceA"
-            app:layout_constraintTop_toTopOf="@id/newPriceA">
+            app:layout_constraintBottom_toBottomOf="@id/newPrice"
+            app:layout_constraintStart_toEndOf="@id/oldPrice"
+            app:layout_constraintTop_toTopOf="@id/newPrice">
 
             <TextView
                 android:id="@+id/discount"
@@ -157,7 +157,7 @@
             android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/newPriceA" />
+            app:layout_constraintTop_toBottomOf="@id/newPrice" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btnName"
@@ -171,6 +171,7 @@
             app:layout_constraintTop_toBottomOf="@+id/description">
 
             <TextView
+                android:id="@+id/productName2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
@@ -248,14 +249,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/articleNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="133987"
-                android:textSize="12sp"
                 android:textColor="#3E3E3E"
-                app:layout_constraintBottom_toBottomOf="@id/textView"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textView" />
 
@@ -383,7 +385,7 @@
             app:layout_constraintTop_toBottomOf="@id/detailsAndHide">
 
             <TextView
-                android:id="@+id/newPriceA2"
+                android:id="@+id/newPrice2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
@@ -396,16 +398,16 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/oldPriceA2"
+                android:id="@+id/oldPrice2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="899 ₽"
                 android:textSize="10sp"
                 android:textColor="#FF8AC9"
                 android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/newPriceA2"
-                app:layout_constraintStart_toEndOf="@+id/newPriceA2"
-                app:layout_constraintTop_toTopOf="@+id/newPriceA2" />
+                app:layout_constraintBottom_toBottomOf="@+id/newPrice2"
+                app:layout_constraintStart_toEndOf="@+id/newPrice2"
+                app:layout_constraintTop_toTopOf="@+id/newPrice2" />
 
             <TextView
                 android:layout_width="wrap_content"

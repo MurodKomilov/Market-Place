@@ -17,7 +17,6 @@ import com.example.marketplace.Adapters.TagsAdapter
 import com.example.marketplace.Interfaces.Communicator
 import com.example.marketplace.Models.Products
 import com.example.marketplace.Models.Tags
-import com.example.marketplace.ProductActivity
 import com.example.marketplace.R
 import com.example.marketplace.databinding.FragmentCatalogBinding
 import com.google.gson.Gson
@@ -56,7 +55,9 @@ class CatalogFragment : Fragment(){
                 val selectedItem = parent?.getItemAtPosition(position).toString()  // Функция для выбранного
 
                 when (selectedItem) {
-                    "" -> clickItem1(jsonData,binding)
+                    "" -> {
+                        clickItem1(jsonData,binding)
+                    }
                     "По популярности" -> clickItem(jsonData,binding)
                     "По уменьшению цены" -> clickItem(jsonData,binding)
                     "По возрастанию цены" ->  clickItem(jsonData,binding)
@@ -91,10 +92,13 @@ class CatalogFragment : Fragment(){
             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
                 var productList = ArrayList<Products>()
                 productList.add(product)
-                val intent = Intent(requireContext(), ProductActivity::class.java)
-                intent.putExtra("productList", Gson().toJson(productList))
-                intent.putExtra("imageList", Gson().toJson(imageList))
-                startActivity(intent)
+                val bundle = Bundle()
+                bundle.putString("product", Gson().toJson(productList))
+                bundle.putString("imageList", Gson().toJson(imageList))
+
+                findNavController().navigate(R.id.productMenuFragment,bundle)
+
+
             } })
         binding.products.adapter = productAdapter
     }
@@ -105,10 +109,11 @@ class CatalogFragment : Fragment(){
             override fun onClickItem(product: Products, imageList: ArrayList<Int>) {
                 var productList = ArrayList<Products>()
                 productList.add(product)
-                val intent = Intent(requireContext(), ProductActivity::class.java)
-                intent.putExtra("productList", Gson().toJson(productList))
-                intent.putExtra("imageList", Gson().toJson(imageList))
-                startActivity(intent)
+                val bundle = Bundle()
+                bundle.putString("product", Gson().toJson(productList))
+                bundle.putString("imageList", Gson().toJson(imageList))
+
+                findNavController().navigate(R.id.productMenuFragment,bundle)
             } })
         binding.products.adapter = productAdapter
     }
